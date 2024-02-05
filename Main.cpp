@@ -55,12 +55,18 @@ void startMenuInput () {
 
 	switch (input) {
 		case '1':
+			system("cls");
+			mazeHeading();
 			levelMenuInput();
 			break;
 		case '2':
+			system("cls");
+			mazeHeading();
 			settingMenuInput();
 			break;
 		case '3':
+			system("cls");
+			mazeHeading();
 			scoreCard(2000);
 			break;
 		case '4':
