@@ -2,6 +2,12 @@
 
 using namespace std;
 
+void mazeHeading ();
+char startMenu ();
+char settingMenu ();
+char levelMenu ();
+void scoreCard (int score);
+
 void mazeHeading () {
 	cout << "     ____________________________________________________________________________________________________ " << endl;
 	cout << "     |                                                                                                  | " << endl;
