@@ -1,27 +1,33 @@
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-#include <stdlib.h>
+#include <cstdlib>
+
+#include "Layout.h"
+
 using namespace std;
 
-void startGame () {
-	char input = ' ';
+void startMenuInput();
+void levelMenuInput();
+void settingMenuInput();
 
-	cout << "     ____________________________________________________________________________________________________" << endl << endl;
+int main(int argc, char** argv) {
 
-	cout << "                             _____________________________________________________         "<< endl;
-	cout << "                            |                                                     |        "<< endl;
-	cout << "                            |    Press the number of level to start that level:   |        "<< endl;
-	cout << "                            |    1. Level 1                                       |        "<< endl;
-	cout << "                            |    2. Level 2                                       |        "<< endl;
-	cout << "                            |    3. Level 3                                       |        "<< endl;
-	cout << "                            |    4. Level 4                                       |        "<< endl;
-	cout << "                            |_____________________________________________________|        "<< endl << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+	
+	mazeHeading();
 
-	cout << "     ____________________________________________________________________________________________________" << endl << endl;
+	startMenuInput();
 
-	cout << "     Enter your input here : ";
-	input = getche();
+	cout << endl;
+
+	return 0;
+}
+
+void levelMenuInput () {
+	
+	char input = levelMenu();
+	
 	cout << endl << endl;
 
 	switch (input) {
@@ -42,113 +48,52 @@ void startGame () {
 	}
 }
 
-void changeSettings () {
+void startMenuInput () {
 
-	char value = ' ';
+	int input = startMenu();
+	cout << endl << endl;
 
-    cout << "     ____________________________________________________________________________________________________" << endl << endl;
-	cout << "                             _____________________________________________________         "<< endl;
-	cout << "                            |                                                     |        "<< endl;
-	cout << "                            |  Press Corresponding value to change color of game  |        "<< endl;
-	cout << "                            |  1. Red                                             |        "<< endl;
-	cout << "                            |  2. Green                                           |        "<< endl;
-	cout << "                            |  3. Blue                                            |        "<< endl;
-	cout << "                            |_____________________________________________________|        "<< endl << endl;
+	switch (input) {
+		case '1':
+			levelMenuInput();
+			break;
+		case '2':
+			settingMenuInput();
+			break;
+		case '3':
+			scoreCard(2000);
+			break;
+		case '4':
+			cout << "     You pressed 4";
+			break;
+		default:
+			cout << "     You entered an invalid option";
+	}
+}
 
-	cout << "     ____________________________________________________________________________________________________" << endl << endl;
-    cout << "     Enter your input here : ";
-	value = getche();
+void settingMenuInput () {
+	
+	char value = settingMenu();
+	
+	cout << endl << endl;
 
     switch (value) {
         case '1':
+        	system("cls");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
             break;
         case '2':
+        	system("cls");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
             break;
         case '3':
+        	system("cls");
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE);
             break;
         default:
             cout << "Invalid color code. Using default color." << endl;
             break;
     }
-}
-
-void scoreChecker () {
-	cout << "     ____________________________________________________________________________________________________" << endl << endl;
-	cout << "                             _____________________________________________________         "<< endl;
-	cout << "                            |                                                     |        "<< endl;
-	cout << "                            |  Press Corresponding value to change color of game  |        "<< endl;
-	cout << "                            |  1. Red                                             |        "<< endl;
-	cout << "                            |  2. Green                                           |        "<< endl;
-	cout << "                            |  3. Blue                                            |        "<< endl;
-	cout << "                            |_____________________________________________________|        "<< endl << endl;
-
-	cout << "     ____________________________________________________________________________________________________" << endl << endl;
-}
-
-char startMenu () {
-	char value = ' ';
-
-	cout << "                             _____________________________________________________         "<< endl;
-	cout << "                            |                                                     |        "<< endl;
-	cout << "                            |               To Start game, Press 1                |        "<< endl;
-	cout << "                            |               To Change Settings, Press 2           |        "<< endl;
-	cout << "                            |               To View Scores, Press 3               |        "<< endl;
-	cout << "                            |               To Quit Game, Press 4                 |        "<< endl;
-	cout << "                            |_____________________________________________________|        "<< endl << endl;
-
-	cout << "     ____________________________________________________________________________________________________" << endl << endl;
-
-	cout << "     Enter your input here : ";
-	value = getche();
-	return value;
-}
-
-void inputChecker () {
-
-	int input = startMenu();
-	cout << endl << endl;
-
-		switch (input) {
-			case '1':
-				startGame();
-				break;
-			case '2':
-				changeSettings();
-				break;
-			case '3':
-				cout << "     You pressed 3";
-				break;
-			case '4':
-				cout << "     You pressed 4";
-				break;
-			default:
-				cout << "     You entered an invalid option";
-		}
-}
-
-int main(int argc, char** argv) {
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
-
-	cout << "     ____________________________________________________________________________________________________ " << endl;
-	cout << "     |                                                                                                  | " << endl;
-	cout << "     |  **      **       **      *******   *******         ********      **      * *      **  *******   | " << endl;
-	cout << "     |  * *    * *      *  *          *    *               *            *  *     *  *    * *  *         | " << endl;
-	cout << "     |  *  *  *  *     *    *        *     *               *           *    *    *   *  *  *  *         | " << endl;
-	cout << "     |  *   **   *    ********      *      *******         *   ****   ********   *    **   *  *******   | " << endl;
-	cout << "     |  *        *   *        *    *       *               *      *  *        *  *         *  *         | " << endl;
-	cout << "     |  *        *  *          *  *******  *******         ******** *          * *         *  *******   | " << endl;
-	cout << "     |__________________________________________________________________________________________________| " << endl << endl;
-
-	cout << "     _____________________________________________________________________________________________________" << endl;
-	cout << "     _____________________________________________________________________________________________________" << endl << endl;
-
-	inputChecker();
-
-	cout << endl;
-
-	return 0;
+    mazeHeading();
+    startMenuInput();
 }
