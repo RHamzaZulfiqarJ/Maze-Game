@@ -6,6 +6,9 @@
 
 using namespace std;
 
+void print_maze(char maze[][50]);
+bool updateMaze (char maze[][50]);
+
 int playerX = 1;
 int playerY = 1;
 
@@ -19,7 +22,7 @@ void print_maze(char maze[][50]) {
 	system("cls");
 	mazeHeading();
     for (int i = 0; i < N; i++) {
-    	cout << "     ";
+    	cout << "        ";
         for (int j = 0; j < M; j++) {
             cout << maze[i][j] << " ";
         }
@@ -33,8 +36,8 @@ bool updateMaze (char maze[][50]) {
 	const int N = 15;
     const int M = 50;
     
-    bool WinOrLose = false;
-    
+    bool WinOrLose;
+        
 	char move;
 
     while (gameRunning) {
@@ -43,9 +46,11 @@ bool updateMaze (char maze[][50]) {
         int prevPlayerX = playerX;
         int prevPlayerY = playerY;
         
-        if (maze[13][48] == '^') {
+        if (maze[13][46] == '^') {
         	WinOrLose = true;
         	gameRunning = false;        	
+		} else {
+			WinOrLose = false;
 		}
 
         switch (move) {
