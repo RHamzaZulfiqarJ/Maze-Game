@@ -77,12 +77,13 @@ void levelMenuInput () {
 	
 	if (message) {	
 		system("cls");
-		cout << "You Won" << endl << endl;
+		youWon();
 		this_thread::sleep_for(chrono::seconds(5));
 		system("cls");
 	} else {
 		system("cls");
-		cout << "You Lose" << endl << endl;
+		youLost();
+		this_thread::sleep_for(chrono::seconds(5));
 	}
 	
 	mazeHeading();
@@ -111,7 +112,10 @@ void startMenuInput () {
 			scoreCard(2000);
 			break;
 		case '4':
-			cout << "     You pressed 4";
+			system("cls");
+			quitGame();
+			this_thread::sleep_for(chrono::seconds(3));
+			exit(0);
 			break;
 		default:
 			cout << "     You entered an invalid option";
