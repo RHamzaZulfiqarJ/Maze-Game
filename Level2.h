@@ -1,6 +1,11 @@
 #include <iostream>
 #include <conio.h>
 #include <cstdlib>
+#include <windows.h>
+#include <iomanip>
+#include <thread>
+
+#include "Globals.h"
 
 #include "Layout.h"
 
@@ -33,7 +38,24 @@ char maze2[21][21] = {
     {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'}
 };
 
-bool gameRunning2 = true;
+int h2 = 0;
+int m2 = 0;
+int s2 = 0;
+
+void timer2() {
+    while (true) {
+        s2 += 1;
+        Sleep(1000);
+        if (s2 > 59) {
+            m2 += 1;
+            s2 = 0;
+        }
+        if (m2 > 59) {
+            h2 += 1;
+            m2 = 0;
+        }
+    }
+}
 
 void printMaze2() {
 
@@ -42,6 +64,9 @@ void printMaze2() {
 	
 	system("cls");
 	mazeHeading();
+    instructions();
+    timerMenu(h2, m2, s2);
+
     for (int i = 0; i < N; i++) {
         for (int spaces = 0; spaces < 35; spaces++) {
             cout << " ";
@@ -54,6 +79,9 @@ void printMaze2() {
 
 }
 
+bool gameRunning2 = true;
+
+
 bool updateMaze2() {
     
     int playerX = 1;
@@ -63,7 +91,11 @@ bool updateMaze2() {
     const int M = 21;
     
     bool WinOrLose;
-        
+    gameRunning2 = true;
+
+    thread timerThread(timer2);
+    timerThread.detach(); // Detach the thread to run independently
+    
 	char move;
 
     while (gameRunning2) {
@@ -73,6 +105,7 @@ bool updateMaze2() {
         int prevPlayerY = playerY;
         
         if (maze2[11][19] == '^') {
+            SCORE = SCORE + 2000 - (m2 * 200);
         	WinOrLose = true;
         	gameRunning2 = false;        	
 		} else {
