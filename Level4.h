@@ -1,6 +1,11 @@
 #include <iostream>
 #include <conio.h>
 #include <cstdlib>
+#include <windows.h>
+#include <iomanip>
+#include <thread>
+
+#include "Globals.h"
 
 #include "Layout.h"
 
@@ -41,7 +46,24 @@ char maze4[29][29] = {
 	{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'},
 };
 
-bool gameRunning4 = true;
+int h4 = 0;
+int m4 = 0;
+int s4 = 0;
+
+void timer4() {
+    while (true) {
+        s4 += 1;
+        Sleep(1000);
+        if (s4 > 59) {
+            m4 += 1;
+            s4 = 0;
+        }
+        if (m4 > 59) {
+            h4 += 1;
+            m4 = 0;
+        }
+    }
+}
 
 void printMaze4() {
 
@@ -50,6 +72,9 @@ void printMaze4() {
 	
 	system("cls");
 	mazeHeading();
+    instructions();
+    timerMenu(h4, m4, s4);
+
     for (int i = 0; i < N; i++) {
         for (int spaces = 0; spaces < 25; spaces++) {
             cout << " ";
@@ -61,6 +86,8 @@ void printMaze4() {
    }
 }
 
+bool gameRunning4 = true;
+
 bool updateMaze4() {
 
     int playerX = 1;
@@ -70,6 +97,10 @@ bool updateMaze4() {
     const int M = 29;
     
     bool WinOrLose;
+    gameRunning4 = true;
+
+    thread timerThread(timer4);
+    timerThread.detach(); // Detach the thread to run independently
         
 	char move;
 
@@ -80,6 +111,7 @@ bool updateMaze4() {
         int prevPlayerY = playerY;
         
         if (maze4[15][27] == '^') {
+            SCORE = SCORE + 2000 - (m4 * 200);
         	WinOrLose = true;
         	gameRunning4 = false;        	
 		} else {
