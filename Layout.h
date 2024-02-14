@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -12,6 +13,9 @@ char startMenu ();
 char settingMenu ();
 char levelMenu ();
 void scoreCard (int score);
+int timerView (int h, int m, int s);
+void timerMenu (int h, int m, int s);
+void instructions();
 
 void mazeHeading () {
 	cout << "     ____________________________________________________________________________________________________ " << endl;
@@ -22,6 +26,31 @@ void mazeHeading () {
 	cout << "     |  *   **   *    ********      *      *******         *   ****   ********   *    **   *  *******   | " << endl;
 	cout << "     |  *        *   *        *    *       *               *      *  *        *  *         *  *         | " << endl;
 	cout << "     |  *        *  *          *  *******  *******         ******** *          * *         *  *******   | " << endl;
+	cout << "     |__________________________________________________________________________________________________| " << endl << endl;
+}
+
+void instructions () {
+	cout << "      ____________________________________________________________________________________________________  " << endl;
+	cout << "     |                                                                                                    | " << endl;
+	cout << "     |                                          HOW TO PLAY THE GAME:                                     | " << endl;
+	cout << "     |                                                                                                    | " << endl;
+	cout << "     |                              -> Press A for moving the character (^) left.                         | " << endl;
+	cout << "     |                              -> Press W for moving the character (^) up.                           | " << endl;
+	cout << "     |                              -> Press D for moving the character (^) right.                        | " << endl;
+	cout << "     |                              -> Press S for moving the character (^) down.                         | " << endl;   
+	cout << "     |                              -> Press Q to quit the game.                                          | " << endl;             
+	cout << "     |____________________________________________________________________________________________________| " << endl;
+}
+
+int timerView (int h, int m, int s) {
+	cout << setw(2) << setfill('0') << h << ":" << setw(2) << setfill('0') << m << ":" << setw(2) << setfill('0') << s;
+	return 0;
+}
+
+void timerMenu (int h, int m, int s) {
+	cout << "      __________________________________________________________________________________________________  " << endl;
+	cout << "     |                                                                                                  | " << endl;
+	cout << "     |                                             " << timerView(h, m, s) << "\b                                             | " << endl;
 	cout << "     |__________________________________________________________________________________________________| " << endl << endl;
 }
 
@@ -136,6 +165,7 @@ char levelMenu () {
 }
 
 void scoreCard (int score) {
+
 	cout << "     ____________________________________________________________________________________________________" << endl << endl;
 	
 	cout << "                             _____________________________________________________         "<< endl;
@@ -144,7 +174,7 @@ void scoreCard (int score) {
 	cout << "                            |  complete the maze. Finishing game in low time      |        "<< endl;
 	cout << "                            |  means higher score.                                |        "<< endl;
 	cout << "                            |                                                     |        "<< endl;
-	cout << "                            |  Higest Score so far : " << score << "                         |        "<< endl;
+	cout << "                            |  Your Total Score : " << setw(4) << setfill(' ') << score << "                            |        "<< endl;
 	cout << "                            |_____________________________________________________|        "<< endl << endl;
 
 	cout << "     ____________________________________________________________________________________________________" << endl << endl;
