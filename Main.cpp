@@ -2,8 +2,8 @@
 #include <conio.h>
 #include <windows.h>
 #include <cstdlib>
-#include <thread>
-#include <chrono>
+
+#include "Globals.h"
 
 #include "Layout.h"
 
@@ -18,6 +18,8 @@ using namespace std;
 void startMenuInput();
 void levelMenuInput();
 void settingMenuInput();
+
+int SCORE;
 
 int main(int argc, char** argv) {
 
@@ -35,25 +37,29 @@ int main(int argc, char** argv) {
 void levelMenuInput () {
 	
 	char input = levelMenu();
-	
-	bool message;
-	
+
+	bool message1 = true;
+	bool message2 = true;
+	bool message3 = true;
+	bool message4 = true;
+	bool message5 = true;
+
 	cout << endl << endl;
 
 	switch (input) {
 		case '1':
 			system("cls");
 			printMaze1();
-			message = updateMaze1();
-			if (message) {	
+			message1 = updateMaze1();
+			if (message1) {	
 				system("cls");
 				youWon();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			} else {
 				system("cls");
 				youLost();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			}
 			break;
@@ -61,17 +67,16 @@ void levelMenuInput () {
 		case '2':
 			system("cls");
 			printMaze2();
-			message = updateMaze2();
-
-			if (message) {	
+			message2 = updateMaze2();
+			if (message2) {
 				system("cls");
 				youWon();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			} else {
 				system("cls");
 				youLost();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			}
 			break;
@@ -79,17 +84,17 @@ void levelMenuInput () {
 		case '3':
 			system("cls");
 			printMaze3();
-			message = updateMaze3();
+			message3 = updateMaze3();
 
-			if (message) {	
+			if (message3) {	
 				system("cls");
 				youWon();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			} else {
 				system("cls");
 				youLost();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			}
 			break;
@@ -97,16 +102,16 @@ void levelMenuInput () {
 		case '4':
 			system("cls");
 			printMaze4();
-			message = updateMaze4();
-			if (message) {	
+			message4 = updateMaze4();
+			if (message4) {	
 				system("cls");
 				youWon();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			} else {
 				system("cls");
 				youLost();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			}
 			break;
@@ -114,21 +119,22 @@ void levelMenuInput () {
 		case '5':
 			system("cls");
 			printMaze5();
-			message = updateMaze5();
-			if (message) {	
+			message5 = updateMaze5();
+			if (message5) {	
 				system("cls");
 				youWon();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			} else {
 				system("cls");
 				youLost();
-				this_thread::sleep_for(chrono::seconds(5));
+				Sleep(3000);
 				system("cls");
 			}
 			break;
 		default:
 			cout << "     You entered invalid input";
+			system("cls");
 	}
 	
 	mazeHeading();
@@ -154,23 +160,28 @@ void startMenuInput () {
 		case '3':
 			system("cls");
 			mazeHeading();
-			scoreCard(2000);
+			scoreCard(SCORE);
+			Sleep(3000);
+			system("cls");
+			mazeHeading();
+			startMenuInput();
 			break;
 		case '4':
 			system("cls");
 			quitGame();
-			this_thread::sleep_for(chrono::seconds(3));
+			Sleep(3000);
 			exit(0);
 			break;
 		default:
 			cout << "     You entered an invalid option";
+			system("cls");
 	}
 }
 
 void settingMenuInput () {
-	
+
 	char value = settingMenu();
-	
+
 	cout << endl << endl;
 
     switch (value) {
@@ -188,6 +199,7 @@ void settingMenuInput () {
             break;
         default:
             cout << "Invalid color code. Using default color." << endl;
+			system("cls");
             break;
     }
     mazeHeading();
